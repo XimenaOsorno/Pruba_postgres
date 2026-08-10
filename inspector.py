@@ -25,7 +25,9 @@ def get_columns(conn, table_name):
         SELECT
             column_name,
             data_type,
-            is_nullable
+            is_nullable,
+            column_default,
+            is_identity
         FROM information_schema.columns
         WHERE table_schema = 'public'
             AND table_name = %s
@@ -117,13 +119,15 @@ def inspect_database():
             
             schema[table] = {
     "columns": [
-        {
-            "name": name,
-            "type": data_type,
-            "nullable": nullable == "YES"
-        }
-        for name, data_type, nullable in columns
-    ],
+    {
+        "name": name,
+        "type": data_type,
+        "nullable": nullable == "YES",
+        "default": default,
+        "identity": identity == "YES"
+    }
+    for name, data_type, nullable, default, identity in columns
+],
 
     "primary_keys": primary_keys,
 

@@ -1,13 +1,6 @@
-from inspector import get_tables, get_columns
+from inspector import inspect_database
 
-tables = get_tables()
 
-for table in tables:
+schema = inspect_database()
 
-    print(f"\nTabla: {table}")
-
-    columns = get_columns(table)
-
-    for column in columns:
-        print(column)
-
+print(schema)

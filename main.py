@@ -1,5 +1,5 @@
 from inspector import inspect_database, get_dependencies, get_insertion_order
-
+from gemini_client import ask_gemini
 
 schema = inspect_database()
 
@@ -27,3 +27,11 @@ print("\n=== VALORES ÚNICOS ===")
 for table, info in schema.items():
     print("Unique:")
     print(info["unique_constraints"])
+    
+
+#Prueba
+response = ask_gemini(
+    "Explica en una frase qué es una base de datos PostgreSQL."
+)
+
+print(response)

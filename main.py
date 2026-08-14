@@ -1,5 +1,6 @@
 from inspector import inspect_database, get_dependencies, get_insertion_order
-from gemini_client import ask_gemini
+from gemini_client import generate_database_strategy
+
 
 schema = inspect_database()
 
@@ -29,9 +30,8 @@ for table, info in schema.items():
     print(info["unique_constraints"])
     
 
-#Prueba
-response = ask_gemini(
-    "Explica en una frase qué es una base de datos PostgreSQL."
-)
+print("\n=== ESTRATEGIA DE IA ===")
 
-print(response)
+strategy = generate_database_strategy(schema)
+
+print(strategy)

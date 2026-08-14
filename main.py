@@ -1,5 +1,6 @@
 from inspector import inspect_database, get_dependencies, get_insertion_order
 from gemini_client import generate_database_strategy
+from data_generator import  generate_table_data
 
 
 schema = inspect_database()
@@ -35,3 +36,16 @@ print("\n=== ESTRATEGIA DE IA ===")
 strategy = generate_database_strategy(schema)
 
 print(strategy)
+
+
+
+print("\n=== DATOS GENERADOS ===")
+
+for table in strategy.tables:
+
+    print(f"\nTabla: {table.table}")
+
+    rows = generate_table_data(table, 3)
+
+    for row in rows:
+        print(row)

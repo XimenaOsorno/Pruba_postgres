@@ -41,11 +41,20 @@ print(strategy)
 
 print("\n=== DATOS GENERADOS ===")
 
+generated_data = {}
+
 for table in strategy.tables:
 
     print(f"\nTabla: {table.table}")
 
-    rows = generate_table_data(table, 3)
+    rows = generate_table_data(
+        table,
+        schema,
+        generated_data,
+        amount=3
+    )
+
+    generated_data[table.table] = rows
 
     for row in rows:
         print(row)
